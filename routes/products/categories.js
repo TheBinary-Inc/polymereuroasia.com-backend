@@ -3,13 +3,14 @@ const router = express.Router();
 const AllProducts = require("../../models/AllProducts");
 
 router.get("/", async (request, response) => {
-  try {
-    const allproducts = await AllProducts.find();
-    response.send(allproducts);
-  } catch (error) {
-    response.send(error);
+    try {
+      const allproducts = await AllProducts.find();
+      response.send(allproducts);
+    } catch (error) {
+      response.send(error);
+    }
   }
-});
+);
 
 router.get("/:productCategory", async (req, res) => {
   try {

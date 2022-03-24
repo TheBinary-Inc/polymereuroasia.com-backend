@@ -7,6 +7,7 @@ const allproducts = require("./routes/products/allproducts");
 const register = require("./routes/auth/admin-register");
 const login = require("./routes/auth/admin-login")
 const category = require('./routes/products/categories');
+const search = require("./routes/products/searchproducts");
 const PORT = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use("/v2/allproducts", allproducts);
 app.use("/v2/category", category);
 app.use("/v2/admin", login);
 app.use("/v2/admin", register);
+app.use("/v2/products", search);
 
 
 mongoose.connect(
