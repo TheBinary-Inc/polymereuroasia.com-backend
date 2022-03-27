@@ -14,30 +14,17 @@ router.get("/", async (request, response) => {
 
 router.get("/:productCategory", async (req, res) => {
   try {
-    if(req.params.productCategory){
-      await AllProducts.find({ productCategory: request.params.productCategory}, (error, data) => {
-          if(data){
-            response.status(200).json({
-              message: `${productCategory} has successfully loaded!`,
-              data
-          })
-          }
-          else{
-            response.status(404).json({
-              message: "Not found!"
-            })
-          }
-        }
-      );
-    }
-    else{
-      response.status(400).json({
-        message: "Query not provided!"
-      })
+    console.log(req.params);
+    if(req.params.productCategory === "all" || req.params.productCategory === "undefined"){
+      const cat = await AllProducts.find().limit((+req.query.page + 1) * req.query.pageCount)
+      res.status(200).json(cat)
+    }else{
+      const cat = await AllProducts.find({productCategory: req.params.productCategory}).limit((+req.query.page + 1) * req.query.pageCount)
+      res.status(200).json(cat)
     }
   } 
   catch (error) {
-    response.status(500).json({ 
+    res.status(500).json({ 
       message: "Internal server error" 
     });
   }
