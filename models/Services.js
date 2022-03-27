@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const AllProductsSchema = mongoose.Schema({
+const AllServicesSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -17,10 +17,6 @@ const AllProductsSchema = mongoose.Schema({
         type: Array,
         required: true
     },
-    price: {
-        type: Number,
-        required: true
-    },
     author: {
         type: String,
         required: true
@@ -32,7 +28,7 @@ const AllProductsSchema = mongoose.Schema({
     productCategory: {
         type: String,
         required: true,
-        default: "smartphones"
+        default: "fixing"
     },
     address: {
         type: String,
@@ -44,4 +40,4 @@ const AllProductsSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('AllProducts', AllProductsSchema);
+module.exports = mongoose.model('AllServices', AllServicesSchema);

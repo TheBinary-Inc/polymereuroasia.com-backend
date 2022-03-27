@@ -4,7 +4,7 @@ const fs = require("fs");
 const verify_admin = require("../../middlewares/verify-admin");
 const cloudinary = require("../../cloudinary");
 const upload = require("../../multer");
-const AllProducts = require("../../models/AllProducts");
+const AllServices = require("../../models/Services");
 
 router.get("/", async (request, response) => {
   try {
@@ -28,12 +28,11 @@ router.post("/",upload.array("image"), verify_admin, async (request, response) =
         fs.unlinkSync(path);
       }
     }
-    const product = new AllProducts({
+    const product = new AllServices({
       name: request.body.name,
       descriptionUz: request.body.descriptionUz,
       descriptionRu: request.body.descriptionRu,
       image: urls,
-      price: request.body.price,
       author: request.body.author,
       authorPhoneNumber: request.body.authorPhoneNumber,
       productCategory: request.body.productCategory,
@@ -49,45 +48,6 @@ router.post("/",upload.array("image"), verify_admin, async (request, response) =
     response.status(405).json({
       error: "unsuccess",
     });
-  }
-});
-
-router.get("/:productId", async (request, response) => {
-  try {
-    const specificProduct = await AllProducts.findById(
-      request.params.productId
-    );
-    response.json(specificProduct);
-  } catch (error) {
-    response.json({ message: error });
-  }
-});
-
-router.delete("/:productId", verify_admin, async (request, response) => {
-  try {
-    const removedProduct = await AllProducts.deleteOne({
-      _id: request.params.productId,
-    });
-    response.json(removedProduct);
-  } catch (error) {
-    response.json({ message: error });
-  }
-});
-
-router.patch("/:productId", verify_admin, async (request, response) => {
-  try {
-    const updatedProduct = await AllProducts.updateOne(
-      { _id: request.params.productId },
-      { $set: { 
-        name: request.body.name, 
-        price: request.body.price, 
-        authorPhoneNumber: request.body.authorPhoneNumber, 
-        address: request.body.address 
-      }}
-    );
-    response.json(updatedProduct);
-  } catch (error) {
-    response.json({ message: error });
   }
 });
 
