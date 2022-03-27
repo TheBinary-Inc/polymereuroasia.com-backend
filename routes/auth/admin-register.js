@@ -5,7 +5,7 @@ const varify_admin = require("../../middlewares/verify-admin");
 const Admin = require("../../models/Admin");
 const admin_register = express.Router();
 
-admin_register.post("/register", varify_admin, (req, res) => {
+admin_register.post("/register", varify_admin, async (req, res) => {
     const { username, password } = req.body;
     const schema = Joi.object({
         username: Joi.string().alphanum().min(5).max(1024).required(),
@@ -15,7 +15,7 @@ admin_register.post("/register", varify_admin, (req, res) => {
     const saltLength = 10;
     if(!validation.error){
         try{
-            const hasAdminCredencials = Admin.findOne({username});
+            const hasAdminCredencials = await Admin.findOne({username});
             if(!hasAdminCredencials){
                 bcrypt.genSalt(saltLength, function(err, salt) {
                     bcrypt.hash(validation.value.password, salt, async function(err, hash) {
@@ -26,14 +26,14 @@ admin_register.post("/register", varify_admin, (req, res) => {
                             })
                             if(newAdmin){
                                 res.status(201).json({
-                                    message: "New admin has successfully created!",
+                                    message: "Yangi admin muvaffaqiyatli yaratildi!",
                                     admin: newAdmin
                                 })
                             }
                         }
                         else{
                             res.status(500).json({
-                                message: "Internal server error!"
+                                message: "Serverda ichki muammo!"
                             })
                         }
                     });
@@ -41,19 +41,19 @@ admin_register.post("/register", varify_admin, (req, res) => {
             }
             else{
                 res.status(409).json({
-                    message: "Already registered account!"
+                    message: "Allaqachon bunday admin bor!"
                 })
             }
         }
         catch(err){
             res.status(500).json({
-                message: "Internal server error!"
+                message: "Serverda ichki muammo!"
             })
         }
     }
     else{
         res.status(400).json({
-            message: validation?.error.details[0].message
+            message: "Foydalanuchi nomi yoki parol yaroqli emas!"
         })
     }
 })

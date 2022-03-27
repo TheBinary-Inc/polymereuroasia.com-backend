@@ -22,34 +22,34 @@ admin_login.post("/auth", async (req, res) => {
                             if(token){
                                 const {password, ...adminCredencials} = hasAdminCredencials;
                                 res.status(200).json({
-                                    message: "Successfully logged in!",
+                                    message: "Muvaffaqiyatli tizimga kirildi!",
                                     admin: adminCredencials,
                                     token
                                 })
                             }
                             else{
                                 res.status(500).json({
-                                    message: "Internal server error!"
+                                    message: "Serverda ichki muammo!"
                                 })
                             }
                         });
                    }
                    else{
                         res.status(200).json({
-                            message: "Password or Username is incorrect!"
+                            message: "Parol yoki Foydalanuvhi nomi xato!"
                         })
                    }
                 }) 
             }
             else{
                 res.status(404).json({
-                    message: "User with this credencial not found!"
+                    message: "Bunday foydalanuvchi mavjud emas!"
                 })
             }
         }
         catch(err){
             res.status(500).json({
-                message: "Internal server error!"
+                message: "Serverda ichki muammo!"
             })
         }
     }
