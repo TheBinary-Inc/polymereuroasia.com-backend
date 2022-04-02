@@ -8,6 +8,7 @@ cloudinary.v2.config({
 });
 
 exports.uploads = (file, folder) => {
+  console.log(file);
   return new Promise (resolve => {
     cloudinary.uploader.upload(file, (result) => {
       resolve({
