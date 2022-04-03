@@ -10,14 +10,15 @@ cloudinary.v2.config({
 exports.uploads = (file, folder) => {
   console.log(file);
   return new Promise (resolve => {
-    cloudinary.uploader.upload(file, (result) => {
+    cloudinary.uploader.upload(file,(result) => {
       resolve({
         url: result.url,
         id: result.public_id
       })
     }, {
       resource_type: "auto",
-      folder: folder
+      folder: folder,
+      quality: "20:qmax_20"
     })
   })
 }
