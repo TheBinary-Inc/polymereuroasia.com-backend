@@ -8,7 +8,6 @@ cloudinary.v2.config({
 });
 
 exports.uploads = (file, folder) => {
-  console.log(file);
   return new Promise (resolve => {
     cloudinary.uploader.upload(file,(result) => {
       resolve({
@@ -18,7 +17,7 @@ exports.uploads = (file, folder) => {
     }, {
       resource_type: "auto",
       folder: folder,
-      quality: "20:qmax_20"
+      quality: "70:qmax_70"
     })
   })
 }
