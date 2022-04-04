@@ -41,6 +41,9 @@ const AllProductsSchema = mongoose.Schema({
     time : { 
         type : Date, 
         default: Date.now 
+    },
+    views: {
+        type: Number
     }
 })
 
