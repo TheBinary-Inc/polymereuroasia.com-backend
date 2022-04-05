@@ -14,7 +14,6 @@ router.get("/", async (request, response) => {
 
 router.get("/:productCategory", async (req, res) => {
   try {
-    console.log(req.params);
     if(req.params.productCategory === "all" || req.params.productCategory === "undefined"){
       const cat = await AllProducts.find().limit((+req.query.page + 1) * req.query.pageCount)
       res.status(200).json(cat)
