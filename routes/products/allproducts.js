@@ -8,7 +8,7 @@ const AllProducts = require("../../models/AllProducts");
 
 router.get("/", async (req, res) => {
   try {
-      const cat = await AllProducts.find().sort({_id:1}).limit((+req.query.page + 1) * req.query.pageCount)
+      const cat = await AllProducts.find().sort({_id:-1}).limit((+req.query.page + 1) * req.query.pageCount)
       res.status(200).json(cat)
   } catch (error) {
     res.send(error);
