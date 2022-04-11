@@ -4,7 +4,7 @@ const AllProducts = require("../../models/AllProducts");
 
 router.get("/", async (request, response) => {
     try {
-      const allproducts = await AllProducts.find().sort({_id:-1}) ;
+      const allproducts = await AllProducts.find().sort({_id:1}) ;
       response.send(allproducts);
     } catch (error) {
       response.send(error);
@@ -15,7 +15,7 @@ router.get("/", async (request, response) => {
 router.get("/:productCategory", async (req, res) => {
   try {
     if(req.params.productCategory === "all" || req.params.productCategory === "undefined"){
-      const cat = await AllProducts.find().sort({_id:-1}).limit((+req.query.page + 1) * req.query.pageCount)
+      const cat = await AllProducts.find().sort({_id:1}).limit((+req.query.page + 1) * req.query.pageCount)
       res.status(200).json(cat)
     }else{
       const cat = await AllProducts.find({productCategory: req.params.productCategory}).limit((+req.query.page + 1) * req.query.pageCount)
