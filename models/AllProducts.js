@@ -18,8 +18,8 @@ const AllProductsSchema = mongoose.Schema({
         required: true
     },
     price: {
-        type: Number,
-        required: true
+        type: String,
+        // required: true
     },
     author: {
         type: String,
