@@ -4,11 +4,11 @@ const fs = require("fs");
 const verify_admin = require("../../middlewares/verify-admin");
 const cloudinary = require("../../cloudinary");
 const upload = require("../../multer");
-const AllServices = require("../../models/Services");
+const AllProducts = require("../../models/AllProducts");
 
 router.get("/", async (request, response) => {
   try {
-    const allproducts = await AllServices.find();
+    const allproducts = await AllProducts.find();
     response.send(allproducts);
   } catch (error) {
     response.send(error);
@@ -28,7 +28,7 @@ router.post("/",upload.array("image"), verify_admin, async (request, response) =
         fs.unlinkSync(path);
       }
     }
-    const product = new AllServices({
+    const product = new AllProducts({
       name: request.body.name,
       descriptionUz: request.body.descriptionUz,
       descriptionRu: request.body.descriptionRu,
