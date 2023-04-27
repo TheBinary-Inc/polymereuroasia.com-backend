@@ -8,7 +8,7 @@ const AllServices = require("../../models/Services");
 
 router.get("/", async (request, response) => {
   try {
-    const allproducts = await AllProducts.find();
+    const allproducts = await AllServices.find();
     response.send(allproducts);
   } catch (error) {
     response.send(error);
