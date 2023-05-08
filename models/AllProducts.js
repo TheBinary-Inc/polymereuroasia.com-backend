@@ -21,6 +21,9 @@ const AllProductsSchema = mongoose.Schema({
         type: String,
         // required: true
     },
+    types: {
+        type: String,
+    },
     author: {
         type: String,
         required: true

@@ -41,6 +41,7 @@ router.post("/",upload.array("image"), verify_admin, async (request, response) =
       descriptionUz: request.body.descriptionUz,
       descriptionRu: request.body.descriptionRu,
       image: urls,
+      types: request.body.types,
       price: request.body.price,
       author: request.body.author,
       authorPhoneNumber: request.body.authorPhoneNumber,
