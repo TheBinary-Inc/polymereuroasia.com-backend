@@ -1,4 +1,4 @@
-name: Deploy to EvenNode
+name: Deploy to EvenNode 
 
 on:
   push:
